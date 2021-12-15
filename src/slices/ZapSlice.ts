@@ -144,7 +144,7 @@ export const executeZap = createAsyncThunk(
       throw e;
     }
     dispatch(getBalances({ address, provider, networkID }));
-    dispatch(getZapTokenBalances({ address, provider, networkID }));
+    // dispatch(getZapTokenBalances({ address, provider, networkID }));
   },
 );
 
@@ -175,18 +175,18 @@ const zapTokenBalancesSlice = createSlice({
 
   extraReducers: builder => {
     builder
-      .addCase(getZapTokenBalances.pending, state => {
-        state.balancesLoading = true;
-      })
-      .addCase(getZapTokenBalances.fulfilled, (state, action) => {
-        if (!action.payload) return;
-        setAll(state, action.payload);
-        state.balancesLoading = false;
-      })
-      .addCase(getZapTokenBalances.rejected, (state, { error }) => {
-        state.balancesLoading = false;
-        console.error(error.message);
-      })
+      // .addCase(getZapTokenBalances.pending, state => {
+      //   state.balancesLoading = true;
+      // })
+      // .addCase(getZapTokenBalances.fulfilled, (state, action) => {
+      //   if (!action.payload) return;
+      //   setAll(state, action.payload);
+      //   state.balancesLoading = false;
+      // })
+      // .addCase(getZapTokenBalances.rejected, (state, { error }) => {
+      //   state.balancesLoading = false;
+      //   console.error(error.message);
+      // })
       .addCase(changeZapTokenAllowance.pending, state => {
         state.changeAllowanceLoading = true;
       })

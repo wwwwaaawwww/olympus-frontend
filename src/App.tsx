@@ -130,7 +130,7 @@ function App() {
       bonds.map(bond => {
         dispatch(calculateUserBondDetails({ address, bond, provider, networkID: chainID }));
       });
-      dispatch(getZapTokenBalances({ address, networkID: chainID, provider: loadProvider }));
+      // dispatch(getZapTokenBalances({ address, networkID: chainID, provider: loadProvider }));
       expiredBonds.map(bond => {
         dispatch(calculateUserBondDetails({ address, bond, provider, networkID: chainID }));
       });

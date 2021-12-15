@@ -10,7 +10,7 @@ import React from "react";
 
 export enum NetworkID {
   Mainnet = 1,
-  Testnet = 4,
+  Testnet = 3,
 }
 
 export enum BondType {

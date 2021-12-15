@@ -110,7 +110,13 @@ export const loadAppDetails = createAsyncThunk(
 
     // Current index
     const currentIndex = await stakingContract.index();
-
+    console.log("# data", {
+      networkID,
+      stakingReward: stakingReward.toString(),
+      circ: circ.toString(),
+      stakingRebase,
+      stakingAPY,
+    });
     return {
       currentIndex: ethers.utils.formatUnits(currentIndex, "gwei"),
       currentBlock,
