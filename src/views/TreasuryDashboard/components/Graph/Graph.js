@@ -132,7 +132,7 @@ export const OHMStakedGraph = () => {
       data={staked}
       dataKey={["staked"]}
       dataFormat="percent"
-      headerText="OHM Staked"
+      headerText="EVHY Staked"
       stopColor={[["#55EBC7", "#47ACEB"]]}
       bulletpointColors={bulletpoints.staked}
       infoTooltipMessage={tooltipInfoMessages.staked}

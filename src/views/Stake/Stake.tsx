@@ -26,10 +26,10 @@ import "./stake.scss";
 import { useWeb3Context } from "src/hooks/web3Context";
 import { isPendingTxn, txnButtonText } from "src/slices/PendingTxnsSlice";
 import { Skeleton } from "@material-ui/lab";
-import ExternalStakePool from "./ExternalStakePool";
+// import ExternalStakePool from "./ExternalStakePool";
 import { error } from "../../slices/MessagesSlice";
 import { ethers } from "ethers";
-import ZapCta from "../Zap/ZapCta";
+// import ZapCta from "../Zap/ZapCta";
 import { useAppSelector } from "src/hooks";
 
 function a11yProps(index: number) {
@@ -191,7 +191,7 @@ function Stake() {
                   >
                     <NewReleases viewBox="0 0 24 24" />
                     <Typography>
-                      <Trans>Migrate sOHM!</Trans>
+                      <Trans>Migrate sEVHY!</Trans>
                     </Typography>
                   </Link>
                 )}
@@ -247,7 +247,7 @@ function Stake() {
                       </Typography>
                       <Typography variant="h4">
                         {currentIndex ? (
-                          <span data-testid="index-value">{trim(Number(currentIndex), 1)} OHM</span>
+                          <span data-testid="index-value">{trim(Number(currentIndex), 1)} EVHY</span>
                         ) : (
                           <Skeleton width="150px" data-testid="index-loading" />
                         )}
@@ -265,7 +265,7 @@ function Stake() {
                     {modalButton}
                   </div>
                   <Typography variant="h6">
-                    <Trans>Connect your wallet to stake OHM</Trans>
+                    <Trans>Connect your wallet to stake EVHY</Trans>
                   </Typography>
                 </div>
               ) : (
@@ -300,16 +300,16 @@ function Stake() {
                               <Typography variant="body1" className="stake-note" color="textSecondary">
                                 {view === 0 ? (
                                   <>
-                                    <Trans>First time staking</Trans> <b>OHM</b>?
+                                    <Trans>First time staking</Trans> <b>EVHY</b>?
                                     <br />
-                                    <Trans>Please approve Olympus Dao to use your</Trans> <b>OHM</b>{" "}
+                                    <Trans>Please approve Olympus Dao to use your</Trans> <b>EVHY</b>{" "}
                                     <Trans>for staking</Trans>.
                                   </>
                                 ) : (
                                   <>
-                                    <Trans>First time unstaking</Trans> <b>sOHM</b>?
+                                    <Trans>First time unstaking</Trans> <b>sEVHY</b>?
                                     <br />
-                                    <Trans>Please approve Olympus Dao to use your</Trans> <b>sOHM</b>{" "}
+                                    <Trans>Please approve Olympus Dao to use your</Trans> <b>sEVHY</b>{" "}
                                     <Trans>for unstaking</Trans>.
                                   </>
                                 )}
@@ -355,7 +355,7 @@ function Stake() {
                                   onChangeStake("stake");
                                 }}
                               >
-                                {txnButtonText(pendingTransactions, "staking", t`Stake OHM`)}
+                                {txnButtonText(pendingTransactions, "staking", t`Stake EVHY`)}
                               </Button>
                             ) : (
                               <Button
@@ -387,7 +387,7 @@ function Stake() {
                                   onChangeStake("unstake");
                                 }}
                               >
-                                {txnButtonText(pendingTransactions, "unstaking", t`Unstake OHM`)}
+                                {txnButtonText(pendingTransactions, "unstaking", t`Unstake EVHY`)}
                               </Button>
                             ) : (
                               <Button
@@ -414,7 +414,7 @@ function Stake() {
                         <Trans>Unstaked Balance</Trans>
                       </Typography>
                       <Typography variant="body1" id="user-balance">
-                        {isAppLoading ? <Skeleton width="80px" /> : <>{trim(Number(ohmBalance), 4)} OHM</>}
+                        {isAppLoading ? <Skeleton width="80px" /> : <>{trim(Number(ohmBalance), 4)} EVHY</>}
                       </Typography>
                     </div>
 
@@ -423,45 +423,45 @@ function Stake() {
                         <Trans>Staked Balance</Trans>
                       </Typography>
                       <Typography variant="body1" id="user-staked-balance">
-                        {isAppLoading ? <Skeleton width="80px" /> : <>{trimmedBalance} sOHM</>}
+                        {isAppLoading ? <Skeleton width="80px" /> : <>{trimmedBalance} sEVHY</>}
                       </Typography>
                     </div>
 
-                    <div className="data-row" style={{ paddingLeft: "10px" }}>
+                    {/* <div className="data-row" style={{ paddingLeft: "10px" }}>
                       <Typography variant="body2" color="textSecondary">
                         <Trans>Single Staking</Trans>
                       </Typography>
                       <Typography variant="body2" color="textSecondary">
-                        {isAppLoading ? <Skeleton width="80px" /> : <>{trim(Number(sohmBalance), 4)} sOHM</>}
+                        {isAppLoading ? <Skeleton width="80px" /> : <>{trim(Number(sohmBalance), 4)} sEVHY</>}
                       </Typography>
-                    </div>
+                    </div> */}
 
-                    <div className="data-row" style={{ paddingLeft: "10px" }}>
+                    {/* <div className="data-row" style={{ paddingLeft: "10px" }}>
                       <Typography variant="body2" color="textSecondary">
                         <Trans>Staked Balance in Fuse</Trans>
                       </Typography>
                       <Typography variant="body2" color="textSecondary">
                         {isAppLoading ? <Skeleton width="80px" /> : <>{trim(Number(fsohmBalance), 4)} fsOHM</>}
                       </Typography>
-                    </div>
+                    </div> */}
 
-                    <div className="data-row" style={{ paddingLeft: "10px" }}>
+                    {/* <div className="data-row" style={{ paddingLeft: "10px" }}>
                       <Typography variant="body2" color="textSecondary">
                         <Trans>Wrapped Balance</Trans>
                       </Typography>
                       <Typography variant="body2" color="textSecondary">
                         {isAppLoading ? <Skeleton width="80px" /> : <>{trim(Number(wsohmBalance), 4)} wsOHM</>}
                       </Typography>
-                    </div>
+                    </div> */}
 
-                    <Divider color="secondary" />
+                    {/* <Divider color="secondary" /> */}
 
                     <div className="data-row">
                       <Typography variant="body1">
                         <Trans>Next Reward Amount</Trans>
                       </Typography>
                       <Typography variant="body1">
-                        {isAppLoading ? <Skeleton width="80px" /> : <>{nextRewardValue} sOHM</>}
+                        {isAppLoading ? <Skeleton width="80px" /> : <>{nextRewardValue} sEVHY</>}
                       </Typography>
                     </div>
 
@@ -489,8 +489,8 @@ function Stake() {
           </Grid>
         </Paper>
       </Zoom>
-      <ZapCta />
-      <ExternalStakePool />
+      {/* <ZapCta /> */}
+      {/* <ExternalStakePool /> */}
     </div>
   );
 }
