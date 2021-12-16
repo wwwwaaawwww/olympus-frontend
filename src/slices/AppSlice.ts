@@ -1,5 +1,6 @@
-import { ethers } from "ethers";
+import { BigNumberish, ethers } from "ethers";
 import { addresses } from "../constants";
+import { abi as ierc20Abi } from "../abi/IERC20.json";
 import { abi as OlympusStakingv2ABI } from "../abi/OlympusStakingv2.json";
 import { abi as sOHMv2 } from "../abi/sOhmv2.json";
 import { setAll, getTokenPrice, getMarketPrice } from "../helpers";
@@ -7,7 +8,7 @@ import apollo from "../lib/apolloClient";
 import { createSlice, createSelector, createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "src/store";
 import { IBaseAsyncThunk } from "./interfaces";
-import { OlympusStakingv2, SOhmv2 } from "../typechain";
+import { OlympusStakingv2, SOhmv2, IERC20 } from "../typechain";
 
 interface IProtocolMetrics {
   readonly timestamp: string;
@@ -68,13 +69,17 @@ export const loadAppDetails = createAsyncThunk(
       console.error("Returned a null response from dispatch(loadMarketPrice)");
       return;
     }
-
-    const marketCap = parseFloat(graphData.data.protocolMetrics[0].marketCap);
+    const ohmContract = new ethers.Contract(addresses[networkID].OHM_ADDRESS as string, ierc20Abi, provider) as IERC20;
+    const ohmTotalSupply = await ohmContract.totalSupply();
+    // const marketCap = parseFloat(graphData.data.protocolMetrics[0].marketCap);
     const circSupply = parseFloat(graphData.data.protocolMetrics[0].ohmCirculatingSupply);
-    const totalSupply = parseFloat(graphData.data.protocolMetrics[0].totalSupply);
+    // const totalSupply = parseFloat(graphData.data.protocolMetrics[0].totalSupply);
     const treasuryMarketValue = parseFloat(graphData.data.protocolMetrics[0].treasuryMarketValue);
     // const currentBlock = parseFloat(graphData.data._meta.block.number);
 
+    const totalSupply: BigNumberish = Number(ohmTotalSupply) / Math.pow(10, 9);
+    const marketCap = totalSupply * marketPrice;
+    console.log("ohmContract :>>>>>>", marketCap);
     if (!provider) {
       console.error("failed to connect to provider, please connect your wallet");
       return {
