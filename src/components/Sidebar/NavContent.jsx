@@ -48,24 +48,22 @@ function NavContent() {
       <Box className="dapp-sidebar-inner" display="flex" justifyContent="space-between" flexDirection="column">
         <div className="dapp-menu-top">
           <Box className="branding-header">
-            <Link href="https://olympusdao.finance" target="_blank">
+            {/* <Link href="https://olympusdao.finance" target="_blank">
               <SvgIcon
                 color="primary"
                 component={OlympusIcon}
                 viewBox="0 0 151 100"
                 style={{ minWdth: "151px", minHeight: "98px", width: "151px" }}
               />
-            </Link>
-
-            {address && (
-              <div className="wallet-link">
-                <Link href={`https://etherscan.io/address/${address}`} target="_blank">
-                  {shorten(address)}
-                </Link>
-              </div>
-            )}
+            </Link> */}
           </Box>
-
+          {address && (
+            <div className="wallet-link">
+              <Link href={`https://etherscan.io/address/${address}`} target="_blank">
+                {shorten(address)}
+              </Link>
+            </div>
+          )}
           <div className="dapp-menu-links">
             <div className="dapp-nav" id="navbarNav">
               <Link
@@ -98,7 +96,7 @@ function NavContent() {
                 </Typography>
               </Link>
 
-              <Link
+              {/* <Link
                 component={NavLink}
                 id="zap-nav"
                 to="/zap"
@@ -112,9 +110,9 @@ function NavContent() {
                   <Typography variant="h6">OlyZaps</Typography>
                   <SvgIcon component={NewIcon} viewBox="21 -2 20 20" style={{ width: "80px" }} />
                 </Box>
-              </Link>
+              </Link> */}
 
-              <Link
+              {/* <Link
                 component={NavLink}
                 id="33-together-nav"
                 to="/33-together"
@@ -127,7 +125,7 @@ function NavContent() {
                   <SvgIcon color="primary" component={PoolTogetherIcon} />
                   3,3 Together
                 </Typography>
-              </Link>
+              </Link> */}
 
               <Link
                 component={NavLink}
@@ -171,7 +169,7 @@ function NavContent() {
             </div>
           </div>
         </div>
-        <Box className="dapp-menu-bottom" display="flex" justifyContent="space-between" flexDirection="column">
+        {/* <Box className="dapp-menu-bottom" display="flex" justifyContent="space-between" flexDirection="column">
           <div className="dapp-menu-external-links">
             {Object.keys(externalUrls).map((link, i) => {
               return (
@@ -185,7 +183,7 @@ function NavContent() {
           <div className="dapp-menu-social">
             <Social />
           </div>
-        </Box>
+        </Box> */}
       </Box>
     </Paper>
   );

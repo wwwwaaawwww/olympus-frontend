@@ -27,7 +27,7 @@ const addTokenToWallet = (tokenSymbol, tokenAddress, address) => async () => {
     let tokenPath;
     let tokenDecimals = TOKEN_DECIMALS;
     switch (tokenSymbol) {
-      case "OHM":
+      case "EVHY":
         tokenPath = OhmImg;
         break;
       case "33T":
@@ -95,7 +95,7 @@ function OhmMenu() {
     >
       <Button id="ohm-menu-button" size="large" variant="contained" color="secondary" title="OHM" aria-describedby={id}>
         <SvgIcon component={InfoIcon} color="primary" />
-        <Typography>OHM</Typography>
+        <Typography>EVHY</Typography>
       </Button>
 
       <Popper id={id} open={open} anchorEl={anchorEl} placement="bottom-start" transition>
@@ -103,7 +103,7 @@ function OhmMenu() {
           return (
             <Fade {...TransitionProps} timeout={100}>
               <Paper className="ohm-menu" elevation={1}>
-                <Box component="div" className="buy-tokens">
+                {/* <Box component="div" className="buy-tokens">
                   <Link
                     href={`https://app.sushi.com/swap?inputCurrency=${daiAddress}&outputCurrency=${OHM_ADDRESS}`}
                     target="_blank"
@@ -135,9 +135,9 @@ function OhmMenu() {
                       <Typography align="left">Wrap sOHM</Typography>
                     </Button>
                   </Link>
-                </Box>
+                </Box> */}
 
-                <Box component="div" className="data-links">
+                {/* <Box component="div" className="data-links">
                   <Divider color="secondary" className="less-margin" />
                   <Link href={`https://dune.xyz/shadow/Olympus-(OHM)`} target="_blank" rel="noreferrer">
                     <Button size="large" variant="contained" color="secondary" fullWidth>
@@ -146,44 +146,44 @@ function OhmMenu() {
                       </Typography>
                     </Button>
                   </Link>
-                </Box>
+                </Box> */}
 
                 {isEthereumAPIAvailable ? (
                   <Box className="add-tokens">
-                    <Divider color="secondary" />
+                    {/* <Divider color="secondary" /> */}
                     <p>
-                      <Trans>ADD TOKEN TO WALLET</Trans>
+                      <Trans className="text-center">ADD TOKEN TO WALLET</Trans>
                     </p>
                     <Box display="flex" flexDirection="row" justifyContent="space-between">
                       {OHM_ADDRESS && (
                         <Button
                           variant="contained"
                           color="secondary"
-                          onClick={addTokenToWallet("OHM", OHM_ADDRESS, address)}
+                          onClick={addTokenToWallet("EVHY", OHM_ADDRESS, address)}
                         >
                           <SvgIcon
                             component={ohmTokenImg}
                             viewBox="0 0 32 32"
                             style={{ height: "25px", width: "25px" }}
                           />
-                          <Typography variant="body1">OHM</Typography>
+                          <Typography variant="body1">EVHY</Typography>
                         </Button>
                       )}
                       {SOHM_ADDRESS && (
                         <Button
                           variant="contained"
                           color="secondary"
-                          onClick={addTokenToWallet("sOHM", SOHM_ADDRESS, address)}
+                          onClick={addTokenToWallet("sEVHY", SOHM_ADDRESS, address)}
                         >
                           <SvgIcon
                             component={sOhmTokenImg}
-                            viewBox="0 0 100 100"
+                            viewBox="0 0 32 32"
                             style={{ height: "25px", width: "25px" }}
                           />
-                          <Typography variant="body1">sOHM</Typography>
+                          <Typography variant="body1">sEVHY</Typography>
                         </Button>
                       )}
-                      {WSOHM_ADDRESS && (
+                      {/* {WSOHM_ADDRESS && (
                         <Button
                           variant="contained"
                           color="secondary"
@@ -210,13 +210,13 @@ function OhmMenu() {
                           />
                           <Typography variant="body1">33T</Typography>
                         </Button>
-                      )}
+                      )} */}
                     </Box>
                   </Box>
                 ) : null}
 
-                <Divider color="secondary" />
-                <Link
+                {/* <Divider color="secondary" /> */}
+                {/* <Link
                   href="https://docs.olympusdao.finance/using-the-website/unstaking_lp"
                   target="_blank"
                   rel="noreferrer"
@@ -226,7 +226,7 @@ function OhmMenu() {
                       <Trans>Unstake Legacy LP Token</Trans>
                     </Typography>
                   </Button>
-                </Link>
+                </Link> */}
               </Paper>
             </Fade>
           );

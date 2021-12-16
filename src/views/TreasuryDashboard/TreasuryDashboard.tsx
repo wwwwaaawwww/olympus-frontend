@@ -39,7 +39,7 @@ const TreasuryDashboard = memo(() => {
           </Paper>
         </Box>
 
-        <Zoom in={true}>
+        {/* <Zoom in={true}>
           <Grid container spacing={2} className="data-grid">
             <Grid item lg={6} md={6} sm={12} xs={12}>
               <Paper className="ohm-card ohm-chart-card">
@@ -65,31 +65,6 @@ const TreasuryDashboard = memo(() => {
               </Paper>
             </Grid>
 
-            {/*  Temporarily removed until correct data is in the graph */}
-            {/* <Grid item lg={6} md={12} sm={12} xs={12}>
-              <Paper className="ohm-card">
-                <Chart
-                  type="bar"
-                  data={data}
-                  dataKey={["holders"]}
-                  headerText="Holders"
-                  stroke={[theme.palette.text.secondary]}
-                  headerSubText={`${data.length > 0 && data[0].holders}`}
-                  bulletpointColors={bulletpoints.holder}
-                  itemNames={tooltipItems.holder}
-                  itemType={undefined}
-                  infoTooltipMessage={tooltipInfoMessages.holder}
-                  expandedGraphStrokeColor={theme.palette.graphStrokeColor}
-                  scale={undefined}
-                  color={undefined}
-                  stroke={undefined}
-                  dataFormat={undefined}
-                  isPOL={undefined}
-                  isStaked={undefined}
-                />
-              </Paper>
-            </Grid> */}
-
             <Grid item lg={6} md={6} sm={12} xs={12}>
               <Paper className="ohm-card">
                 <OHMStakedGraph />
@@ -108,7 +83,7 @@ const TreasuryDashboard = memo(() => {
               </Paper>
             </Grid>
           </Grid>
-        </Zoom>
+        </Zoom> */}
       </Container>
     </div>
   );
