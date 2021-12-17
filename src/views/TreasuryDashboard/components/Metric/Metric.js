@@ -3,6 +3,7 @@ import { Skeleton } from "@material-ui/lab";
 import { Typography, Box } from "@material-ui/core";
 import { trim, formatCurrency } from "../../../../helpers";
 import InfoTooltip from "src/components/InfoTooltip/InfoTooltip.jsx";
+import { allBondsMap } from "src/helpers/AllBonds";
 
 export const Metric = props => <Box className={`metric ${props.className}`}>{props.children}</Box>;
 
@@ -37,15 +38,26 @@ export const OHMPrice = () => {
 };
 
 export const CircSupply = () => {
-  const circSupply = useSelector(state => state.app.circSupply);
-  const totalSupply = useSelector(state => state.app.totalSupply);
+  // const circSupply = useSelector(state => state.app.circSupply);
+  // const totalSupply = useSelector(state => state.app.totalSupply);
+  const treasuryBalance = useSelector(state => {
+    if (state.bonding.loading == false) {
+      let tokenBalances = 0;
+      for (const bond in allBondsMap) {
+        if (state.bonding[bond]) {
+          tokenBalances += state.bonding[bond].purchased;
+        }
+      }
+      return tokenBalances;
+    }
+  });
 
-  const isDataLoaded = circSupply && totalSupply;
+  // const isDataLoaded = circSupply && totalSupply;
 
   return (
     <Metric className="circ">
-      <Metric.Title>Circulating Supply (total)</Metric.Title>
-      <Metric.Value>{isDataLoaded && parseInt(circSupply) + " / " + parseInt(totalSupply)}</Metric.Value>
+      <Metric.Title>Treasury Balance</Metric.Title>
+      <Metric.Value>{treasuryBalance && formatCurrency(treasuryBalance, 2)}</Metric.Value>
     </Metric>
   );
 };
@@ -76,19 +88,11 @@ export const CurrentIndex = () => {
 };
 
 export const WSOHMPrice = () => {
-  // const wsOhmPrice = useSelector(state => state.app.marketPrice * state.app.currentIndex);
-  const marketPrice = useSelector(state => state.app.marketPrice);
+  const stakingTVL = useSelector(state => state.app.stakingTVL);
   return (
     <Metric className="wsoprice">
-      <Metric.Title>
-        sEVHY Price
-        <InfoTooltip
-          message={
-            "wsOHM = sOHM * index\n\nThe price of wsOHM is equal to the price of OHM multiplied by the current index"
-          }
-        />
-      </Metric.Title>
-      <Metric.Value>{marketPrice && formatCurrency(marketPrice, 2)}</Metric.Value>
+      <Metric.Title>TVL</Metric.Title>
+      <Metric.Value>{stakingTVL && formatCurrency(stakingTVL, 2)}</Metric.Value>
       {/* <Metric.Value>{wsOhmPrice && formatCurrency(wsOhmPrice, 2)}</Metric.Value> */}
     </Metric>
   );

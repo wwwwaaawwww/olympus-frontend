@@ -55,7 +55,7 @@ export const loadAppDetails = createAsyncThunk(
       return;
     }
 
-    const stakingTVL = parseFloat(graphData.data.protocolMetrics[0].totalValueLocked);
+    // const stakingTVL = parseFloat(graphData.data.protocolMetrics[0].totalValueLocked);
     // NOTE (appleseed): marketPrice from Graph was delayed, so get CoinGecko price
     // const marketPrice = parseFloat(graphData.data.protocolMetrics[0].ohmPrice);
     let marketPrice;
@@ -69,7 +69,17 @@ export const loadAppDetails = createAsyncThunk(
       console.error("Returned a null response from dispatch(loadMarketPrice)");
       return;
     }
+
+    // const totalSupply = (await timeContract.totalSupply()) / Math.pow(10, 9);
+    // const circSupply = (await memoContract.circulatingSupply()) / Math.pow(10, 9);
+
     const ohmContract = new ethers.Contract(addresses[networkID].OHM_ADDRESS as string, ierc20Abi, provider) as IERC20;
+
+    const sohmMainContract = new ethers.Contract(
+      addresses[networkID].SOHM_ADDRESS as string,
+      sOHMv2,
+      provider,
+    ) as SOhmv2;
     const ohmTotalSupply = await ohmContract.totalSupply();
     // const marketCap = parseFloat(graphData.data.protocolMetrics[0].marketCap);
     const circSupply = parseFloat(graphData.data.protocolMetrics[0].ohmCirculatingSupply);
@@ -79,6 +89,10 @@ export const loadAppDetails = createAsyncThunk(
 
     const totalSupply: BigNumberish = Number(ohmTotalSupply) / Math.pow(10, 9);
     const marketCap = totalSupply * marketPrice;
+    const circ = await sohmMainContract.circulatingSupply();
+    const sOhmCirculatingSupply = Number(circ) / Math.pow(10, 9);
+    const stakingTVL = sOhmCirculatingSupply * marketPrice;
+
     console.log("ohmContract :>>>>>>", marketCap);
     if (!provider) {
       console.error("failed to connect to provider, please connect your wallet");
@@ -99,20 +113,12 @@ export const loadAppDetails = createAsyncThunk(
       provider,
     ) as OlympusStakingv2;
 
-    const sohmMainContract = new ethers.Contract(
-      addresses[networkID].SOHM_ADDRESS as string,
-      sOHMv2,
-      provider,
-    ) as SOhmv2;
-
     // Calculating staking
     const epoch = await stakingContract.epoch();
     const stakingReward = epoch.distribute;
-    const circ = await sohmMainContract.circulatingSupply();
     const stakingRebase = Number(stakingReward.toString()) / Number(circ.toString());
     const fiveDayRate = Math.pow(1 + stakingRebase, 5 * 3) - 1;
     const stakingAPY = Math.pow(1 + stakingRebase, 365 * 3) - 1;
-
     // Current index
     const currentIndex = await stakingContract.index();
     console.log("# data", {
