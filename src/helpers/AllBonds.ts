@@ -47,7 +47,7 @@ export const dai = new StableBond({
       reserveAddress: "0x6b175474e89094c44da98b954eedeac495271d0f",
     },
     [NetworkID.Testnet]: {
-      bondAddress: "0xD1486b968978d654A9F5b2Bd36EE4B0a1f51E86b",
+      bondAddress: "0x42e1c83B30560a509bF2D7D3C88D6811f59ad3F5",
       reserveAddress: "0x916f320dA64a8458f0d8Deb258dCD7C87A0B71e1",
     },
   },
@@ -306,7 +306,7 @@ export const ohm_weth = new CustomBond({
 // Is it an LP Bond? use `new LPBond`
 // Add new bonds to this array!!
 // export const allBonds = [dai, frax, eth, cvx, ohm_dai, ohm_frax, lusd, ohm_lusd, ohm_weth];
-export const allBonds = [dai, frax];
+export const allBonds = [dai];
 // TODO (appleseed-expiredBonds): there may be a smarter way to refactor this
 export const allExpiredBonds = [cvx_expired];
 export const allBondsMap = allBonds.reduce((prevVal, bond) => {
